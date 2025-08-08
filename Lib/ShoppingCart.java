@@ -54,7 +54,6 @@ public class ShoppingCart {
      */
     public void addItem(String productId, int quantity) throws ProductNotFoundException {
         if (quantity <= 0) {
-            //System.out.println("Warning: Could not add item. Product ID '" + productId + "' not found or invalid quantity.");
             throw new ProductNotFoundException("Quantity can't be negetive.");
         }
         Product p = productCatalog.findById(productId);
@@ -116,3 +115,4 @@ public class ShoppingCart {
         checkRep(); // ตรวจสอบหลังการเปลี่ยนแปลง
     }
 }
+

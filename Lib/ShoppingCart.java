@@ -51,10 +51,11 @@ public class ShoppingCart {
      * หากมีสินค้าชนิดเดียวกันอยู่แล้ว จะเพิ่มจำนวนเข้าไป
      * @param productId รหัสของสินค้า
      * @param quantity จำนวนที่ต้องการเพิ่ม (ต้องมากกว่า 0)
+     * @throws ProductNotFoundException หากไม่พบสินค้าในcatalog
      */
     public void addItem(String productId, int quantity) throws ProductNotFoundException {
         if (quantity <= 0) {
-            throw new ProductNotFoundException("Quantity can't be negetive.");
+            throw new IllegalArgumentException("Quantity can't be negetive.");
         }
         Product p = productCatalog.findById(productId);
         for (CartItem item : items) {
@@ -72,7 +73,6 @@ public class ShoppingCart {
      * ลบสินค้า (ทั้งรายการ) ออกจากตะกร้า
      * @param productId รหัสของสินค้าที่ต้องการลบ
      * @throws InvalidOperationException หากวนลูปแล้วไม่เจอสินค้าที่จะลบ
-     * @throws IllegalArgumentException เมื่อรหัสสินค้าเป็น null
      */
     public void removeItem(String productId) throws InvalidOperationException {
         if (productId == null) throw new IllegalArgumentException("ProductId can't be null");
@@ -115,4 +115,3 @@ public class ShoppingCart {
         checkRep(); // ตรวจสอบหลังการเปลี่ยนแปลง
     }
 }
-
